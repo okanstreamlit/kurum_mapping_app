@@ -37,7 +37,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 st.write('\n')
-st.image('C:dogru csv.png')
+st.image('dogru csv.png')
 
 st.write('\n')
 
@@ -293,5 +293,4 @@ if input_file is not None:
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
 
-        
         hide_mapping_button = st.button('Kurumların Maplemesini Göster', key = 'show_button_2', on_click = button_clicked_to_show)
