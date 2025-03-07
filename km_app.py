@@ -184,7 +184,9 @@ if input_file is None:
 
 if input_file is not None:
 
-    original_input = pd.read_csv(input_file)
+    original_input = pd.read_csv(input_file, delimiter=";") # yeni 07-03-2025
+    original_input = original_input.dropna(axis=1, how="all") # yeni 07-03-2025
+    original_input = original_input.dropna(subset=[original_input.columns[0]]) # yeni 07-03-2025
 
     with st.expander("Yüklemiş Olduğunuz Dosya", expanded=False):
         st.dataframe(original_input)
