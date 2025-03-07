@@ -150,7 +150,7 @@ def create_input_df(original_input):
     numerical_columns = df.columns[1:].tolist()
     for col in numerical_columns:
         if not pd.api.types.is_numeric_dtype(df[col]):
-            df[col] = pd.to_numeric(df[col].astype(str).str.replace(',', ''), errors='coerce')
+            df[col] = pd.to_numeric(df[col].astype(str).str.replace('.', '').str.replace(',', '.'), errors='coerce')
 
     if df.columns[0] == 'kurum_adi':
         df = df.rename(columns = {df.columns[0]: 'kurum_adi_'})
