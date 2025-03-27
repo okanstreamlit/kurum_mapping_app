@@ -23,9 +23,9 @@ st.markdown("""
             <li>Dosya CSV UTF-8 formatında olmalıdır.</li>
             <li>Dosyanın ilk sütununda kurum isimleri olmalıdır ve A1'den başlamalıdır.</li>
             <li>Dosyanın diğer sütunlarında toplanması istenilen değerler olmalıdır.</li>
-            <li>Dosyada toplam tutar gösteren bir satır <b>olmamalıdır</b>.</li>
-            <li>Sayı gösteren sütunlarda ondalık nokta (.) ile gösterilmelidir. Örnek olarak: 1200.25 ✅ | 1200,25 ❌</li>
-            <li>1000'den büyük sayılarda ayraç olarak virgül kullanılabilir. Örnek olarak: 1,200.25 ✅ | 1200,25 ✅</li>
+            <li>❌ Dosyada toplam tutar gösteren bir satır <b>olmamalıdır ❌</b>.</li>
+            <li>Sayı gösteren sütunlarda <b>ondalık virgul (,) ile gösterilmelidir<b>. Örnek olarak: 1200,25 ✅ | 1200.25 ❌</li>
+            <li>1000'den büyük sayılarda ayraç kullanılmamalıdır. Örnek olarak: 1200,25 ✅ | 1.200,25 ❌</li>
         </ul>
     </div>
 """, unsafe_allow_html=True)
