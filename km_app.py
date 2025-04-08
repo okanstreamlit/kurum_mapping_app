@@ -47,7 +47,7 @@ def load_references():
 
 @st.cache_resource
 def load_model():
-    return SentenceTransformer("kurum_mapping_app/models/all-MiniLM-L6-v2-local")
+    return SentenceTransformer("all-MiniLM-L6-v2-local")
 
 def button_clicked_to_show():
     st.session_state['df_map_status'] += 1
