@@ -104,7 +104,11 @@ def clean_text(text):
         "EGT VE ART.": "EGITIM VE ARASTIRMA ",
         "TIP FAK.": " ", 
         "MRK.": "MERKEZI ", 
-        "  ": " "
+        "  ": " ",
+
+        # MANUEL DUZELTME
+        "ACIBADEM ETILER POL": "ACIBADEM ETILER TIP MERKEZI"
+
     }
     
     for key, value in replacements.items():
