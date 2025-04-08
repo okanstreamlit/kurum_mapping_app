@@ -106,6 +106,10 @@ def clean_text(text):
         "MRK.": "MERKEZI ", 
         "  ": " ",
 
+        "POLIKLINIGI":'HOSPITAL',
+        'MEDICALPARK':'MEDICAL PARK',
+        'TIP MERKEZI': 'HOSPITAL'
+
         # MANUEL DUZELTME
         "ACIBADEM ETILER POL": "ACIBADEM ETILER TIP MERKEZI"
 
