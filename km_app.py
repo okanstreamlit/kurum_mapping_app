@@ -110,16 +110,15 @@ def clean_text(text):
         'MEDI GOLD':'MEDIGOLD',
 
         'TIP MR':'TIP MERKEZI',
-        ' POL ':' POLIKLINIGI ',
+        ' POL':' POLIKLINIGI',
         'MEDIKAL':'MEDICAL',
 
         "POLIKLINIGI":'HOSPITAL',
         'MEDICALPARK':'MEDICAL PARK',
         'VM MEDICAL PARK': 'MEDICAL PARK', #
-        'TIP MERKEZI': 'HOSPITAL',
+        'TIP MERKEZI': 'HOSPITAL'
 
-        # MANUEL DUZELTME
-        "ACIBADEM ETILER POL": "ACIBADEM ETILER TIP MERKEZI"
+
 
     }
     
