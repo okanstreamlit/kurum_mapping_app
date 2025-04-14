@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import re
 import io
 import joblib
 from sentence_transformers import SentenceTransformer, util
@@ -54,76 +55,81 @@ def button_clicked_to_show():
 
 def button_clicked_to_hide():
     st.session_state['df_map_status'] += 1
-
 def clean_text(text):
     replacements = {
-        '(eski Adı Biruni Üniv.sağ.eğitimi Uygulama Ve Araş. Merk)': '',
-        "İ": "I", 
-        "Ö": "O", 
-        "Ü": "U", 
-        "Ç": "C", 
-        "Ş": "S", 
-        "Ğ": "G",
-        "?": " ", 
-        "!": " ", 
-        "-": " ", 
-        "_": " ", 
-        "  ": " ",
-        " N.HAST": " FLORENCE NIGHTINGALE HASTANESI",
-        "(ACIBADEM POLIKLINIKLERI A.S.)": "",
-        "HASTANESI": "HOSPITAL", 
-        "HASTANE": "HOSPITAL",
-        "LIV HASTANESI": "LIV HOSPITAL", 
-        "DR.": "DOKTOR ",
-        "HİZ.TİC.A.Ş": "", 
-        "HIZ.TIC": "", 
-        " HIZ.": "", 
-        " TIC.": "", 
-        " AS.": "",
-        " SAG ": " SAGLIK ", 
-        " SAG.": " SAGLIK ",
-        "ORTOPEDI": "ORT.", 
-        "OZEL ": "", 
-        " OZEL ": "",
-        " ECZANE ": " ECZANESI ", 
-        "ECZANE ": "ECZANESI ", 
-        "ECZ.": "ECZANESI ",
-        " HAS.": " HOSPITAL", 
-        " HAS": " HOSPITAL ", 
-        " HAST.": " HOSPITAL",
-        " UNIVERSITE ": " UNIVERSITESI ", 
-        " UNI ": " UNIVERSITESI ",
-        " UNI. ": " UNIVERSITESI ", 
-        " UNV ": " UNIVERSITESI ",
-        " UNV. ": " UNIVERSITESI ", 
-        " UNIV ": " UNIVERSITESI ",
-        " UNIV. ": " UNIVERSITESI ", 
-        " FTR ": " FIZIK TEDAVI VE REHABILITASYON ",
-        "TC.": "", 
-        "IST.": "ISTANBUL ", 
-        "EGT VE ART.": "EGITIM VE ARASTIRMA ",
-        "TIP FAK.": " ", 
-        "MRK.": "MERKEZI ", 
-        "  ": " ",
+            '(eski Adı Biruni Üniv.sağ.eğitimi Uygulama Ve Araş. Merk)': '',
+            "İ": "I", 
+            "Ö": "O", 
+            "Ü": "U", 
+            "Ç": "C", 
+            "Ş": "S", 
+            "Ğ": "G",
+            "?": " ", 
+            "!": " ", 
+            "-": " ", 
+            "_": " ", 
+            "  ": " ",
+            " N.HAST": " FLORENCE NIGHTINGALE HASTANESI",
+            "(ACIBADEM POLIKLINIKLERI A.S.)": "",
+            "HASTANESI": "HOSPITAL", 
+            "HASTANE": "HOSPITAL",
+            "LIV HASTANESI": "LIV HOSPITAL", 
+            "DR.": "DOKTOR ",
+            "HİZ.TİC.A.Ş": "", 
+            "HIZ.TIC": "", 
+            " HIZ.": "", 
+            " TIC.": "", 
+            " AS.": "",
+            " SAG ": " SAGLIK ", 
+            " SAG.": " SAGLIK ",
+            "ORTOPEDI": "ORT.", 
+            "OZEL ": "", 
+            " OZEL ": "",
+            " ECZANE ": " ECZANESI ", 
+            "ECZANE ": "ECZANESI ", 
+            "ECZ.": "ECZANESI ",
+            #" HAS.": " HOSPITAL", 
+            #" HAS": " HOSPITAL ", 
+            #" HAST.": " HOSPITAL",
+            " UNIVERSITE ": " UNIVERSITESI ", 
+            " UNI ": " UNIVERSITESI ",
+            " UNI. ": " UNIVERSITESI ", 
+            " UNV ": " UNIVERSITESI ",
+            " UNV. ": " UNIVERSITESI ", 
+            " UNIV ": " UNIVERSITESI ",
+            " UNIV. ": " UNIVERSITESI ", 
+            " FTR ": " FIZIK TEDAVI VE REHABILITASYON ",
+            "TC.": "", 
+            "IST.": "ISTANBUL ", 
+            "EGT VE ART.": "EGITIM VE ARASTIRMA ",
+            "TIP FAK.": " ", 
+            "MRK.": "MERKEZI ", 
+            "  ": " ",
 
-        'MEDI STATE':'MEDISTATE',
-        'MEDI GOLD':'MEDIGOLD',
+            'MEDI STATE':'MEDISTATE',
+            'MEDI GOLD':'MEDIGOLD',
 
-        'TIP MR':'TIP MERKEZI',
-        ' POL':' POLIKLINIGI',
-        'MEDIKAL':'MEDICAL',
+            "POLIKLINIGI":'HOSPITAL',
 
-        "POLIKLINIGI":'HOSPITAL',
-        'MEDICALPARK':'MEDICAL PARK',
-        'VM MEDICAL PARK': 'MEDICAL PARK', #
-        'TIP MERKEZI': 'HOSPITAL'
+            'TIP MR':'TIP MERKEZI',
+            'MEDIKAL':'MEDICAL',
 
+            
+            'MEDICALPARK':'MEDICAL PARK',
+            'VM MEDICAL PARK': 'MEDICAL PARK', #
+            'TIP MERKEZI': 'HOSPITAL'
 
-
-    }
+        }
     
     for key, value in replacements.items():
         text = text.replace(key, value)
+
+    text = re.sub(r' POL$', ' HOSPITAL', text)
+    text = re.sub(r' POL.$', ' HOSPITAL', text)
+    text = re.sub(r' HAS$', ' HOSPITAL', text)
+    text = re.sub(r' HAS.$', ' HOSPITAL', text)
+    text = re.sub(r' HAST$', ' HOSPITAL', text)
+    text = re.sub(r' HAST.$', ' HOSPITAL', text)
     
     return text.strip()
 
